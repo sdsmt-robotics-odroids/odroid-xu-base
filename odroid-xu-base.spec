@@ -1,5 +1,5 @@
 Name:           odroid-xu-base
-Version:        0.2.0
+Version:        0.3.0
 Release:        1%{?dist}
 Summary:        Basic system configurations for ODROID-XU
 
@@ -14,6 +14,7 @@ Source4:        50-hk_hdmi.rules
 Source5:        50-hk_hdmi.conf
 Source6:        60-hk_cec.rules
 Source7:        Odroid-max98090.conf
+Source8:        40-smsc95xx.conf
 
 BuildArch:      noarch
 
@@ -38,6 +39,7 @@ install -p -m0644 -D %{SOURCE4} %{buildroot}%{_prefix}/lib/udev/rules.d/50-hk_hd
 install -p -m0644 -D %{SOURCE5} %{buildroot}%{_prefix}/lib/dracut/dracut.conf.d/50-hk_hdmi.conf
 install -p -m0644 -D %{SOURCE6} %{buildroot}%{_prefix}/lib/udev/rules.d/60-hk_cec.rules
 install -p -m0644 -D %{SOURCE7} %{buildroot}%{_datadir}/alsa/cards/Odroid-max98090.conf
+install -p -m0644 -D %{SOURCE8} %{buildroot}%{_prefix}/lib/dracut/dracut.conf.d/40-smsc95xx.conf
 
 install -d %{buildroot}%{_prefix}/lib/firmware/
 ln -s s5p-mfc-v6.fw %{buildroot}%{_prefix}/lib/firmware/mfc_fw.bin
@@ -52,10 +54,14 @@ ln -s s5p-mfc-v6.fw %{buildroot}%{_prefix}/lib/firmware/mfc_fw.bin
 %{_prefix}/lib/udev/rules.d/60-hk_cec.rules
 %{_prefix}/lib/firmware/mfc_fw.bin
 %{_datadir}/alsa/cards/Odroid-max98090.conf
+%{_prefix}/lib/dracut/dracut.conf.d/40-smsc95xx.conf
 %dir %{_datadir}/alsa
 %dir %{_datadir}/alsa/cards
 
 %changelog
+* Wed Oct 19 2016 Scott K Logan <logans@cottsay.net> - 0.3.0-1
+- Add smsc95xx dracut config
+
 * Sun Apr 05 2015 Scott K Logan <logans@cottsay.net> - 0.2.0-1
 - Add hk_hdmi, hk_cec and Odroid-max98090.conf
 
